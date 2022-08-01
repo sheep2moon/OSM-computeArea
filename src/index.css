@@ -3,11 +3,7 @@
   font-size: 16px;
   line-height: 24px;
   font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
   background-color: #242424;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -16,6 +12,13 @@
 }
 
 .leaflet-container {
-  height: 600px;
-  width: 800px;
+  height: calc(100vh - 4rem);
+  width: calc(100% - 4rem);
+  margin-left: auto;
+  margin-top: auto;
+}
+
+*{
+  margin: 0;
+  box-sizing: border-box;
 }
