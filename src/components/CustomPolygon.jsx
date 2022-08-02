@@ -2,16 +2,17 @@ import { Polygon } from "react-leaflet";
 import React from "react";
 import DraggableMarker from "./DraggableMarker.jsx";
 import { useDispatch, useSelector } from "react-redux";
-import { changePolygonMarkerPosition, deletePolygonMarker, setCurrentPolygon } from "../redux/mapSlice.js";
+import { changePolygonMarkerPosition, deletePolygonMarker } from "../redux/polygonsSlice.js";
+import { selectLayer } from "../redux/selectSlice.js";
 
 const CustomPolygon = ({ polygon, polygonIndex }) => {
     const dispatch = useDispatch();
-    const { currentPolygon } = useSelector(store => store.map);
+    const { selected } = useSelector(store => store.select);
 
     const eventHandlers = {
         click: e => {
             e.originalEvent.view.L.DomEvent.stopPropagation(e);
-            dispatch(setCurrentPolygon(polygonIndex));
+            handleSelect();
         }
     };
 
@@ -23,12 +24,16 @@ const CustomPolygon = ({ polygon, polygonIndex }) => {
         dispatch(changePolygonMarkerPosition({ polygonIndex, markerIndex, position }));
     };
 
+    const handleSelect = () => {
+        dispatch(selectLayer({ type: "polygon", index: polygonIndex }));
+    };
+
     return (
         <>
             {polygon.markers.map((marker, index) => (
-                <DraggableMarker position={marker} deleteMarker={handleDeleteMarker} handleMove={handleMove} markerIndex={index} key={marker[0] + index}></DraggableMarker>
+                <DraggableMarker onLayer="polygon" position={marker} deleteMarker={handleDeleteMarker} handleSelect={handleSelect} handleMove={handleMove} markerIndex={index} key={marker[0] + index}></DraggableMarker>
             ))}
-            <Polygon pathOptions={{ color: currentPolygon === polygonIndex ? "#D61C4E" : "#100720" }} positions={polygon.markers} eventHandlers={eventHandlers} />
+            <Polygon pathOptions={{ color: selected.index === polygonIndex && selected.type === "polygon" ? "#D61C4E" : "#100720" }} positions={polygon.markers} eventHandlers={eventHandlers} />
         </>
     );
 };

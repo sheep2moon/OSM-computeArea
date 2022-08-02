@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import { addPolygon, resetAll, setCurrentPolygon } from "../../redux/mapSlice.js";
+import { resetAll } from "../../redux/polygonsSlice.js";
 import SidebarButton from "./SidebarButton.jsx";
 import { TbPolygon, TbPolygonOff } from "react-icons/tb";
 import { IoAnalyticsOutline } from "react-icons/io5";
@@ -45,12 +45,12 @@ const Sidebar = () => {
                 <span>+</span>
             </SidebarButton>
 
-            <SidebarButton tooltip="New Polygon" isActive={activeTool === "new-polygon"} onClick={() => handleChangeTool("new-polygon")}>
+            <SidebarButton tooltip="Add Polygon" isActive={activeTool === "add-polygon"} onClick={() => handleChangeTool("add-polygon")}>
                 <TbPolygon />
                 <span>+</span>
             </SidebarButton>
 
-            <SidebarButton tooltip="Add path" isActive={activeTool === "add-path"} onClick={() => handleChangeTool("add-path")}>
+            <SidebarButton tooltip="Add polyline" isActive={activeTool === "add-polyline"} onClick={() => handleChangeTool("add-polyline")}>
                 <IoAnalyticsOutline />
                 <span>+</span>
             </SidebarButton>

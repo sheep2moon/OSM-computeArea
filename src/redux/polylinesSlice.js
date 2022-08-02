@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { calcDistance } from "../utils/calculateDistance.js";
 
 const initialState = {
-    currentPolyline: null,
     polylines: []
 };
 
@@ -11,10 +11,10 @@ const polylinesSlice = createSlice({
     reducers: {
         addPolyline: (state, action) => {
             state.polylines.push({ distance: 0, markers: [action.payload] });
-            state.currentPolyline = state.polylines.length - 1;
         },
         addPolylineMarker: (state, action) => {
-            state.polylines[state.currentPolyline].markers.push(action.payload);
+            state.polylines[action.payload.polylineIndex].markers.push(action.payload.markerPosition);
+            // calcDistance(state.polylines[state.currentPolyline].markers);
         },
         movePolylineMarker: (state, action) => {
             state.polylines[action.payload.polylineIndex].markers[action.payload.markerIndex] = action.payload.position;

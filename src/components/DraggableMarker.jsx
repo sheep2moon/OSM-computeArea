@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { PinIcon } from "./PinIcon.js";
 
-const DraggableMarker = ({ position, markerIndex, deleteMarker, handleMove }) => {
+const DraggableMarker = ({ position, markerIndex, deleteMarker, handleMove, handleSelect }) => {
     const markerRef = useRef(null);
     const { activeTool } = useSelector(store => store.tools);
 
@@ -20,6 +20,9 @@ const DraggableMarker = ({ position, markerIndex, deleteMarker, handleMove }) =>
         click: () => {
             if (activeTool === "delete-marker") {
                 deleteMarker(markerIndex);
+            }
+            if (activeTool === "select") {
+                handleSelect();
             }
         }
     };

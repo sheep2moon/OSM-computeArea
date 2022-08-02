@@ -1,12 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
-import mapReducer from "./mapSlice.js";
+import polygonsReducer from "./polygonsSlice.js";
 import polylinesReducer from "./polylinesSlice.js";
+import selectReducer from "./selectSlice.js";
 import toolsReducer from "./toolsSlice.js";
 
 export default configureStore({
     reducer: {
-        map: mapReducer,
         tools: toolsReducer,
-        polylines: polylinesReducer
+        polygons: polygonsReducer,
+        polylines: polylinesReducer,
+        select: selectReducer
     }
 });

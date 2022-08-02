@@ -3,7 +3,8 @@ import { useSelector } from "react-redux";
 import styled from "styled-components";
 
 const ResultBar = () => {
-    const { currentPolygon, polygons } = useSelector(store => store.map);
+    const { currentPolygon, polygons } = useSelector(store => store.polygons);
+    const { currentPolyline, polylines } = useSelector(store => store.polylines);
 
     if (currentPolygon < 0) {
         return <></>;
@@ -12,11 +13,11 @@ const ResultBar = () => {
     return (
         <ResultBarContainer>
             <ResultsWrap>
-                <p>Selected polygon area: </p>
+                {/* <p>Selected polygon area: </p>
                 <p>{polygons[currentPolygon].area.toFixed(2) + " \u33A1"}</p>
                 <p>{(polygons[currentPolygon].area / 100).toFixed(2) + " a"}</p>
                 <p>{(polygons[currentPolygon].area / 10000).toFixed(2) + " ha"}</p>
-                <p>{(polygons[currentPolygon].area / 1000000).toFixed(2) + " km"}</p>
+                <p>{(polygons[currentPolygon].area / 1000000).toFixed(2) + " km"}</p> */}
             </ResultsWrap>
         </ResultBarContainer>
     );
