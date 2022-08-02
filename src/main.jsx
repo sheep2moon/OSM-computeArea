@@ -9,7 +9,8 @@ import store from "./redux/store.js";
 const theme = {
     colors: {
         primary: "#EAE3D2",
-        secondary: "#607EAA"
+        secondary: "#607EAA",
+        light: "#ABC9FF"
     },
     shadows: {
         md: "rgba(0, 0, 0, 0.24) 0px 3px 8px"

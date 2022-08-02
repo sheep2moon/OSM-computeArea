@@ -16,9 +16,16 @@
   width: calc(100% - 4rem);
   margin-left: auto;
   margin-top: auto;
+  cursor: crosshair;
 }
 
 *{
   margin: 0;
   box-sizing: border-box;
 }
+.leaflet-div-icon{
+  background: none;
+  border: none;
+}
+
+

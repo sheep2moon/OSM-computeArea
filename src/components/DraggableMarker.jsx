@@ -1,33 +1,35 @@
-import { useMemo, useRef } from "react";
-import { Marker, Popup, useMapEvent } from "react-leaflet";
-import { RiDeleteBin2Line } from "react-icons/ri";
+import { useEffect, useRef } from "react";
+import { Marker } from "react-leaflet";
 import styled from "styled-components";
-import { useDispatch } from "react-redux";
-import { changeMarkerPosition } from "../redux/mapSlice.js";
+import { useSelector } from "react-redux";
+import { PinIcon } from "./PinIcon.js";
 
-const DraggableMarker = ({ position, index, deleteMarker }) => {
+const DraggableMarker = ({ position, markerIndex, deleteMarker, handleMove }) => {
     const markerRef = useRef(null);
-    const dispatch = useDispatch();
+    const { activeTool } = useSelector(store => store.tools);
 
     const eventHandlers = {
         dragend: () => {
             const marker = markerRef.current;
             if (marker != null) {
                 const { lat, lng } = marker.getLatLng();
-                dispatch(changeMarkerPosition({ index, position: [lat, lng] }));
+                const newPosition = [lat, lng];
+                handleMove(markerIndex, newPosition);
+            }
+        },
+        click: () => {
+            if (activeTool === "delete-marker") {
+                deleteMarker(markerIndex);
             }
         }
     };
 
-    return (
-        <Marker draggable={true} eventHandlers={eventHandlers} position={position} ref={markerRef}>
-            <Popup>
-                <DelBtn onClick={e => deleteMarker(e, index)}>
-                    <RiDeleteBin2Line />
-                </DelBtn>
-            </Popup>
-        </Marker>
-    );
+    useEffect(() => {
+        console.log(markerRef);
+        markerRef.current.setIcon(PinIcon);
+    }, []);
+
+    return <Marker draggable={activeTool === "move-marker" ? true : false} eventHandlers={eventHandlers} position={position} ref={markerRef}></Marker>;
 };
 
 export default DraggableMarker;

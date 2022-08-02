@@ -1,38 +1,34 @@
 import { Polygon } from "react-leaflet";
-import React, { useState } from "react";
+import React from "react";
 import DraggableMarker from "./DraggableMarker.jsx";
-import { useDispatch } from "react-redux";
-import { deleteMarker, setCurrentPolygon } from "../redux/mapSlice.js";
+import { useDispatch, useSelector } from "react-redux";
+import { changePolygonMarkerPosition, deletePolygonMarker, setCurrentPolygon } from "../redux/mapSlice.js";
 
-const CustomPolygon = ({ polygon, index }) => {
+const CustomPolygon = ({ polygon, polygonIndex }) => {
     const dispatch = useDispatch();
-    const [color, setColor] = useState("#100720");
+    const { currentPolygon } = useSelector(store => store.map);
 
     const eventHandlers = {
-        mouseover: e => {
-            setColor("#1C3879");
-        },
-        mouseout: e => {
-            setColor("#100720");
-        },
         click: e => {
             e.originalEvent.view.L.DomEvent.stopPropagation(e);
-            dispatch(setCurrentPolygon(index));
+            dispatch(setCurrentPolygon(polygonIndex));
         }
     };
 
-    const handleDeleteMarker = (e, index) => {
-        console.log(e);
-        e.stopPropagation();
-        dispatch(deleteMarker(index));
+    const handleDeleteMarker = markerIndex => {
+        dispatch(deletePolygonMarker({ polygonIndex, markerIndex }));
+    };
+
+    const handleMove = (markerIndex, position) => {
+        dispatch(changePolygonMarkerPosition({ polygonIndex, markerIndex, position }));
     };
 
     return (
         <>
             {polygon.markers.map((marker, index) => (
-                <DraggableMarker position={marker} deleteMarker={handleDeleteMarker} index={index} key={marker[0] + index}></DraggableMarker>
+                <DraggableMarker position={marker} deleteMarker={handleDeleteMarker} handleMove={handleMove} markerIndex={index} key={marker[0] + index}></DraggableMarker>
             ))}
-            <Polygon pathOptions={{ color }} positions={polygon.markers} eventHandlers={eventHandlers} />
+            <Polygon pathOptions={{ color: currentPolygon === polygonIndex ? "#D61C4E" : "#100720" }} positions={polygon.markers} eventHandlers={eventHandlers} />
         </>
     );
 };
