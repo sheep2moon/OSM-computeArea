@@ -1,10 +1,31 @@
 import React from "react";
 import styled from "styled-components";
+import { useDispatch } from "react-redux";
+import { addPolygon, resetAll } from "../../redux/mapSlice.js";
+import SidebarButton from "./SidebarButton.jsx";
+import { TbPolygon, TbPolygonOff } from "react-icons/tb";
 
 const Sidebar = () => {
+    const dispatch = useDispatch();
+
+    const handleAddPolygon = () => {
+        dispatch(addPolygon());
+    };
+
+    const handleDeleteAll = () => {
+        dispatch(resetAll());
+    };
+
     return (
         <SidebarContainer>
             <LogoWrap></LogoWrap>
+            <SidebarButton onClick={handleAddPolygon}>
+                <TbPolygon />
+            </SidebarButton>
+
+            <SidebarButton onClick={handleDeleteAll}>
+                <TbPolygonOff />
+            </SidebarButton>
         </SidebarContainer>
     );
 };
