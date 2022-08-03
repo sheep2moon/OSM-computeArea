@@ -1,9 +1,8 @@
 import styled from "styled-components";
 import { MapContainer, TileLayer } from "react-leaflet";
-import { useState } from "react";
-import LayersContainer from "./components/LayersContainer.jsx";
 import Sidebar from "./components/Controls/Sidebar.jsx";
-import ResultBar from "./components/ResultBar.jsx";
+import ResultBar from "./components/ResultBar/ResultBar.jsx";
+import FiguresContainer from "./components/FiguresContainer.jsx";
 
 function App() {
     return (
@@ -12,7 +11,7 @@ function App() {
             <ResultBar />
             <MapContainer center={[51.41006810573438, 22.386360168457035]} zoom={13} scrollWheelZoom={true}>
                 <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-                <LayersContainer />
+                <FiguresContainer />
             </MapContainer>
         </AppContainer>
     );

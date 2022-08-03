@@ -1,9 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import { resetAll } from "../../redux/polygonsSlice.js";
 import SidebarButton from "./SidebarButton.jsx";
-import { TbPolygon, TbPolygonOff } from "react-icons/tb";
+import { TbPolygon } from "react-icons/tb";
 import { IoAnalyticsOutline } from "react-icons/io5";
 import { FaRegHandPointer, FaMapMarkerAlt } from "react-icons/fa";
 import { BsArrowsMove } from "react-icons/bs";
@@ -17,47 +16,47 @@ const Sidebar = () => {
         dispatch(setActiveTool(toolName));
     };
 
-    const handleDeleteAll = () => {
-        dispatch(resetAll());
-    };
+    const tools = [
+        {
+            name: "select",
+            tooltip: "Select",
+            icon: <FaRegHandPointer />
+        },
+        {
+            name: "add-marker",
+            tooltip: "Add marker",
+            icon: <FaMapMarkerAlt />
+        },
+        {
+            name: "move-marker",
+            tooltip: "Move marker",
+            icon: <BsArrowsMove />
+        },
+        {
+            name: "delete-marker",
+            tooltip: "Delete marker",
+            icon: <FaMapMarkerAlt />
+        },
+        {
+            name: "add-polygon",
+            tooltip: "Add polygon",
+            icon: <TbPolygon />
+        },
+        {
+            name: "add-polyline",
+            tooltip: "Add polyline",
+            icon: <IoAnalyticsOutline />
+        }
+    ];
 
     return (
         <SidebarContainer>
             <LogoWrap></LogoWrap>
-            <SidebarButton tooltip="Select" isActive={activeTool === "select"} onClick={() => handleChangeTool("select")}>
-                <FaRegHandPointer />
-            </SidebarButton>
-
-            <SidebarButton tooltip="Move Marker" isActive={activeTool === "move-marker"} onClick={() => handleChangeTool("move-marker")}>
-                <FaMapMarkerAlt />
-                <span>
-                    <BsArrowsMove />
-                </span>
-            </SidebarButton>
-
-            <SidebarButton tooltip="Delete Marker" isActive={activeTool === "delete-marker"} onClick={() => handleChangeTool("delete-marker")}>
-                <FaMapMarkerAlt />
-                <span>-</span>
-            </SidebarButton>
-
-            <SidebarButton tooltip="Add marker to polygon" isActive={activeTool === "add-marker-to-polygon"} onClick={() => handleChangeTool("add-marker-to-polygon")}>
-                <FaMapMarkerAlt />
-                <span>+</span>
-            </SidebarButton>
-
-            <SidebarButton tooltip="Add Polygon" isActive={activeTool === "add-polygon"} onClick={() => handleChangeTool("add-polygon")}>
-                <TbPolygon />
-                <span>+</span>
-            </SidebarButton>
-
-            <SidebarButton tooltip="Add polyline" isActive={activeTool === "add-polyline"} onClick={() => handleChangeTool("add-polyline")}>
-                <IoAnalyticsOutline />
-                <span>+</span>
-            </SidebarButton>
-
-            <SidebarButton tooltip="Delete all" onClick={handleDeleteAll}>
-                <TbPolygonOff />
-            </SidebarButton>
+            {tools.map(({ name, tooltip, icon }) => (
+                <SidebarButton isActive={name === activeTool} key={name} tooltip={tooltip} onClick={() => handleChangeTool(name)}>
+                    {icon}
+                </SidebarButton>
+            ))}
         </SidebarContainer>
     );
 };
