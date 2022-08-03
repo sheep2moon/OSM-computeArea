@@ -1,8 +1,9 @@
 import { useEffect, useRef } from "react";
+import L from "leaflet";
 import { Marker } from "react-leaflet";
-import styled from "styled-components";
 import { useSelector } from "react-redux";
-import { PinIcon } from "./PinIcon.js";
+import MarkerIcon from "./MarkerIcon.jsx";
+import { renderToString } from "react-dom/server";
 
 const DraggableMarker = ({ position, markerIndex, handleMove, handleDelete, handleSelect }) => {
     const markerRef = useRef(null);
@@ -22,18 +23,18 @@ const DraggableMarker = ({ position, markerIndex, handleMove, handleDelete, hand
                 handleDelete(markerIndex);
             }
             if (activeTool === "select") {
-                //TODO SELECT FIGURE
                 handleSelect();
             }
         }
     };
 
     useEffect(() => {
-        console.log(markerRef);
-        markerRef.current.setIcon(PinIcon);
+        const html = renderToString(<MarkerIcon />);
+        const CustomIcon = new L.DivIcon({ html, iconAnchor: [13, 13], iconSize: [22, 22] });
+        markerRef.current.setIcon(CustomIcon);
     }, []);
 
-    return <Marker draggable={activeTool === "move-marker" ? true : false} eventHandlers={eventHandlers} position={position} ref={markerRef}></Marker>;
+    return <Marker style={{ visibility: "hidden" }} draggable={activeTool === "move-marker" ? true : false} eventHandlers={eventHandlers} position={position} ref={markerRef}></Marker>;
 };
 
 export default DraggableMarker;

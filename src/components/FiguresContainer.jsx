@@ -1,7 +1,7 @@
 import React from "react";
 import { useMapEvent } from "react-leaflet";
 import { useDispatch, useSelector } from "react-redux";
-import { addFigure, addMarker, deleteMarker, moveMarker } from "../redux/figuresSlice.js";
+import { addFigure, addMarker, deleteMarker, moveMarker, selectFigure } from "../redux/figuresSlice.js";
 import { setActiveTool } from "../redux/toolsSlice.js";
 import Figure from "./Figure.jsx";
 
@@ -35,6 +35,9 @@ const FiguresContainer = () => {
         }
         if (activeTool === "add-marker") {
             dispatch(addMarker({ markerPosition }));
+        }
+        if (activeTool === "select") {
+            dispatch(selectFigure(null));
         }
     });
 

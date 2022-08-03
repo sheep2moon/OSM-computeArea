@@ -10,20 +10,21 @@ const ResultBar = () => {
     const { figures, selected } = useSelector(store => store.figures);
 
     const distance = useMemo(() => {
-        if (selected) {
+        console.log("distance");
+        if (selected || selected === 0) {
             return calcDistance(figures[selected].markers);
         }
     }, [figures, selected]);
 
     const area = useMemo(() => {
-        if (selected) {
+        if (selected || selected === 0) {
             return calcArea(figures[selected].markers);
         }
     }, [figures, selected]);
 
     return (
         <ResultBarContainer>
-            {selected && (
+            {selected !== null && (
                 <ResultsWrap>
                     {figures[selected].type === "polygon" && <AreaResult area={area} />}
                     {figures[selected].type === "polyline" && <DistanceResult distance={distance} />}
@@ -38,13 +39,15 @@ export default ResultBar;
 const ResultBarContainer = styled.div`
     position: fixed;
     top: 0;
-    left: 4rem;
+    left: 0;
     right: 0;
     height: 4rem;
     background-color: ${props => props.theme.colors.primary};
     display: flex;
     justify-content: center;
-    border-bottom: ${props => `2px solid ${props.theme.colors.secondary}`};
+    box-shadow: ${props => props.theme.shadows.lg};
+    z-index: 1000;
+    color: ${({ theme }) => theme.colors.light};
 `;
 
 const ResultsWrap = styled.div`

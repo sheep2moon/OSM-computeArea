@@ -24,6 +24,7 @@ const Figure = ({ figure, figureIndex }) => {
     };
 
     const handleMarkerSelect = () => {
+        console.log("what", figureIndex);
         dispatch(selectFigure(figureIndex));
     };
 
@@ -40,8 +41,8 @@ const Figure = ({ figure, figureIndex }) => {
 
     return (
         <>
-            {figure.type === "polygon" && <Polygon pathOptions={{ color: selected === figureIndex ? "#D61C4E" : "#100720", weight: 2 }} {...figureProps} />}
-            {figure.type === "polyline" && <Polyline pathOptions={{ color: selected === figureIndex ? "#D61C4E" : "#100720", weight: 6 }} {...figureProps} />}
+            {figure.type === "polygon" && <Polygon pathOptions={{ color: selected === figureIndex ? "#F8B400" : "#827397", weight: 2 }} {...figureProps} />}
+            {figure.type === "polyline" && <Polyline pathOptions={{ color: selected === figureIndex ? "#F8B400" : "#827397", weight: 4 }} {...figureProps} />}
             {figure.markers.map((marker, index) => (
                 <DraggableMarker key={`marker${figureIndex}-${index}`} position={marker} markerIndex={index} {...markerProps} />
             ))}
