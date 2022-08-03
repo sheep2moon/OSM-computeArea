@@ -8,6 +8,7 @@ import { renderToString } from "react-dom/server";
 const DraggableMarker = ({ position, markerIndex, handleMove, handleDelete, handleSelect }) => {
     const markerRef = useRef(null);
     const { activeTool } = useSelector(store => store.tools);
+    const { isMarkersVisible } = useSelector(store => store.figures);
 
     const eventHandlers = {
         dragend: () => {
@@ -29,10 +30,10 @@ const DraggableMarker = ({ position, markerIndex, handleMove, handleDelete, hand
     };
 
     useEffect(() => {
-        const html = renderToString(<MarkerIcon />);
+        const html = renderToString(<MarkerIcon isMarkerVisible={isMarkersVisible} />);
         const CustomIcon = new L.DivIcon({ html, iconAnchor: [13, 13], iconSize: [22, 22] });
         markerRef.current.setIcon(CustomIcon);
-    }, []);
+    }, [isMarkersVisible]);
 
     return <Marker style={{ visibility: "hidden" }} draggable={activeTool === "move-marker" ? true : false} eventHandlers={eventHandlers} position={position} ref={markerRef}></Marker>;
 };

@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     selected: null,
-    figures: []
+    figures: [],
+    isMarkersVisible: true
 };
 
 const figuresSlice = createSlice({
@@ -34,9 +35,13 @@ const figuresSlice = createSlice({
         },
         selectFigure: (state, action) => {
             state.selected = action.payload;
+        },
+        toggleMarkersVisibility: (state, _) => {
+            console.log("sw");
+            state.isMarkersVisible = !state.isMarkersVisible;
         }
     }
 });
 
-export const { addFigure, deleteFigure, addMarker, deleteMarker, moveMarker, selectFigure } = figuresSlice.actions;
+export const { addFigure, deleteFigure, addMarker, deleteMarker, moveMarker, selectFigure, toggleMarkersVisibility } = figuresSlice.actions;
 export default figuresSlice.reducer;

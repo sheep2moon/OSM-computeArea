@@ -19,7 +19,7 @@ const SidebarButton = ({ tooltip, children, ...rest }) => {
 export default SidebarButton;
 
 const ButtonWrapper = styled.div`
-    width: 100%;
+    width: 4rem;
     height: 4rem;
     display: flex;
     justify-content: center;

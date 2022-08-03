@@ -39,9 +39,15 @@ const Figure = ({ figure, figureIndex }) => {
         positions: figure.markers
     };
 
+    const poylgonPathOptions = {
+        color: selected === figureIndex ? "#F8B400" : "#827397",
+        weight: 2,
+        fillOpacity: 0.4
+    };
+
     return (
         <>
-            {figure.type === "polygon" && <Polygon pathOptions={{ color: selected === figureIndex ? "#F8B400" : "#827397", weight: 2 }} {...figureProps} />}
+            {figure.type === "polygon" && <Polygon pathOptions={poylgonPathOptions} {...figureProps} />}
             {figure.type === "polyline" && <Polyline pathOptions={{ color: selected === figureIndex ? "#F8B400" : "#827397", weight: 4 }} {...figureProps} />}
             {figure.markers.map((marker, index) => (
                 <DraggableMarker key={`marker${figureIndex}-${index}`} position={marker} markerIndex={index} {...markerProps} />

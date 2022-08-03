@@ -11,8 +11,9 @@
 
 .leaflet-container {
   height: calc(100vh - 4rem);
-  width: calc(100% - 4rem);
-  margin-left: auto;
+  width: calc(100% - 28rem);
+  margin-right: 24rem;
+  margin-left: 4rem;
   margin-top: auto;
   cursor: crosshair;
 }

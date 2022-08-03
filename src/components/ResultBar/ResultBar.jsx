@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { calcDistance } from "../../utils/calculateDistance.js";

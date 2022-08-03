@@ -3,15 +3,15 @@ import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import SidebarButton from "./SidebarButton.jsx";
 import { setActiveTool } from "../../redux/toolsSlice.js";
-
 import { TbPolygon, TbMapPinOff } from "react-icons/tb";
 import { IoAnalyticsOutline } from "react-icons/io5";
 import { AiFillEyeInvisible } from "react-icons/ai";
 import { RiMapPinAddLine } from "react-icons/ri";
 import { BsArrowsMove } from "react-icons/bs";
 import { GiArrowCursor } from "react-icons/gi";
+import { toggleMarkersVisibility } from "../../redux/figuresSlice.js";
 
-const Sidebar = () => {
+const ToolsSidebar = () => {
     const { activeTool } = useSelector(store => store.tools);
     const dispatch = useDispatch();
 
@@ -49,11 +49,6 @@ const Sidebar = () => {
             name: "delete-marker",
             tooltip: "Delete marker",
             icon: <TbMapPinOff />
-        },
-        {
-            name: "toggle-marker-visibility",
-            tooltip: "On/Off markers visibility",
-            icon: <AiFillEyeInvisible />
         }
     ];
 
@@ -64,11 +59,14 @@ const Sidebar = () => {
                     {icon}
                 </SidebarButton>
             ))}
+            <SidebarButton tooltip="On/Off markers visibility" onClick={() => dispatch(toggleMarkersVisibility())}>
+                <AiFillEyeInvisible />
+            </SidebarButton>
         </SidebarContainer>
     );
 };
 
-export default Sidebar;
+export default ToolsSidebar;
 
 const SidebarContainer = styled.div`
     position: fixed;

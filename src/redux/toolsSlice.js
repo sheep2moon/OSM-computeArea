@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    activeTool: "select"
+    activeTool: "select",
+    isFiguresSidebarOpen: true
 };
 
 const toolsSlice = createSlice({
