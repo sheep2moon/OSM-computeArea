@@ -8,9 +8,13 @@ const InputSelect = ({ options, value, setValue }) => {
         }
     }, [options]);
 
+    const handleChange = e => {
+        setValue(e.target.value);
+    };
+
     return (
         <SelectWrap>
-            <SelectInput value={value} onChange={e => setValue(e.target.value)}>
+            <SelectInput value={value} onChange={handleChange}>
                 {options?.length > 0 &&
                     options.map(category => (
                         <StyledOption key={category} value={category}>
@@ -38,5 +42,7 @@ const SelectInput = styled.select`
     border: ${({ theme }) => `2px solid ${theme.colors.light}`};
     font-weight: 600;
     padding-left: 1rem;
+    width: 6rem;
+    border-radius: 4px;
 `;
 const StyledOption = styled.option``;

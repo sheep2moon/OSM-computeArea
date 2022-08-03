@@ -9,7 +9,7 @@ import store from "./redux/store.js";
 const theme = {
     colors: {
         primary: "#363062",
-        secondary: "#827397",
+        secondary: "#231955",
         light: "#ABC9FF",
         accent: "#82DBD8"
     },

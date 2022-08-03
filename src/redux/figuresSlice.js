@@ -12,6 +12,7 @@ const figuresSlice = createSlice({
     reducers: {
         addFigure: (state, action) => {
             state.figures.push({
+                id: state.figures.length,
                 name: action.payload.name,
                 type: action.payload.type,
                 markers: [action.payload.markerPosition],
@@ -21,8 +22,8 @@ const figuresSlice = createSlice({
             state.selected = state.figures.length - 1;
         },
         deleteFigure: (state, action) => {
-            if (state.selected === action.payload.figureIndex) state.selected = null;
-            state.figures.splice(action.payload.figureIndex, 1);
+            state.selected = null;
+            state.figures = state.figures.filter(figure => figure.id !== action.payload.figureId);
         },
         addMarker: (state, action) => {
             state.figures[state.selected].markers.push(action.payload.markerPosition);

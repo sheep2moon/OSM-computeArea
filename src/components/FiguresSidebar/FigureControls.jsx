@@ -1,20 +1,22 @@
 import React, { useMemo, useState } from "react";
 import styled from "styled-components";
-import SidebarButton from "../ToolsSidebar/SidebarButton.jsx";
 import { RiDeleteBack2Line } from "react-icons/ri";
 import { AiOutlineArrowsAlt } from "react-icons/ai";
 import { BiArea } from "react-icons/bi";
-
+import { useDispatch, useSelector } from "react-redux";
 import { calcDistance } from "../../utils/calculateDistance.js";
 import { calcArea } from "../../utils/calculateArea.js";
 import InputSelect from "../InputSelect.jsx";
+import { deleteFigure, selectFigure } from "../../redux/figuresSlice.js";
 
 const areaUnits = ["m2", "a", "ha", "km2"];
 const distanceUnits = ["m", "km"];
 
-const FigureControls = ({ figure }) => {
-    const [areaUnit, setAreaUnit] = useState(areaUnits[0]);
-    const [distanceUnit, setDistanceUnit] = useState(distanceUnits[0]);
+const FigureControls = ({ figure, figureIndex }) => {
+    const [areaUnit, setAreaUnit] = useState(areaUnits[1]);
+    const [distanceUnit, setDistanceUnit] = useState(distanceUnits[1]);
+    const { selected } = useSelector(store => store.figures);
+    const dispatch = useDispatch();
 
     const distance = useMemo(() => {
         const metersDistance = calcDistance(figure.markers);
@@ -43,11 +45,19 @@ const FigureControls = ({ figure }) => {
         return metersArea.toFixed(2);
     }, [figure, areaUnit]);
 
+    const handleDeleteFigure = () => {
+        console.log(figure.id);
+        dispatch(deleteFigure({ figureId: figure.id }));
+    };
+    const handleSelectFigure = () => {
+        dispatch(selectFigure(figureIndex));
+    };
+
     return (
-        <ControlsWrap>
-            <TopRow>
+        <ControlsWrap isSelected={selected === figureIndex}>
+            <TopRow onClick={handleSelectFigure}>
                 <p>{figure.name}</p>
-                <DeleteFigureButton>
+                <DeleteFigureButton onClick={handleDeleteFigure}>
                     <RiDeleteBack2Line />
                 </DeleteFigureButton>
             </TopRow>
@@ -87,6 +97,7 @@ const ControlsWrap = styled.div`
     box-shadow: ${({ theme }) => theme.shadows.md};
     width: 100%;
     padding: 1rem 0;
+    background-color: ${({ isSelected, theme }) => (isSelected ? theme.colors.secondary : theme.colors.primary)};
 `;
 const Row = styled.div`
     display: flex;
@@ -119,4 +130,11 @@ const TopRow = styled.div`
     align-items: center;
     padding: 0 1rem;
     font-size: 1.4rem;
+    > p {
+        margin-right: auto;
+    }
+    :hover {
+        background-color: ${({ theme }) => theme.colors.secondary};
+        cursor: pointer;
+    }
 `;
