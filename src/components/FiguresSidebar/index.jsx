@@ -14,8 +14,8 @@ const FiguresSidebar = () => {
         <SidebarContainer>
             <h2>Figures</h2>
             {figures.length === 0 && <p>no figures</p>}
-            {figures.map((figure, index) => (
-                <FigureControls key={figure.name} figure={figure} figureIndex={index} />
+            {figures.map(figure => (
+                <FigureControls key={figure.name} figure={figure} />
             ))}
         </SidebarContainer>
     );

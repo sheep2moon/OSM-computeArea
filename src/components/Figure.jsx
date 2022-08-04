@@ -4,28 +4,27 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteMarker, moveMarker, selectFigure } from "../redux/figuresSlice.js";
 import DraggableMarker from "./DraggableMarker.jsx";
 
-const Figure = ({ figure, figureIndex }) => {
+const Figure = ({ figure }) => {
     const dispatch = useDispatch();
     const { selected } = useSelector(store => store.figures);
 
     const eventHandlers = {
         click: e => {
             e.originalEvent.view.L.DomEvent.stopPropagation(e);
-            dispatch(selectFigure(figureIndex));
+            handleMarkerSelect();
         }
     };
 
     const handleMarkerDelete = markerIndex => {
-        dispatch(deleteMarker({ figureIndex, markerIndex }));
+        dispatch(deleteMarker({ figureId: figure.id, markerIndex }));
     };
 
     const handleMarkerMove = (markerIndex, markerPosition) => {
-        dispatch(moveMarker({ figureIndex, markerIndex, markerPosition }));
+        dispatch(moveMarker({ figureId: figure.id, markerIndex, markerPosition }));
     };
 
     const handleMarkerSelect = () => {
-        console.log("what", figureIndex);
-        dispatch(selectFigure(figureIndex));
+        dispatch(selectFigure(figure.id));
     };
 
     const markerProps = {
@@ -40,7 +39,7 @@ const Figure = ({ figure, figureIndex }) => {
     };
 
     const poylgonPathOptions = {
-        color: selected === figureIndex ? "#F8B400" : "#827397",
+        color: selected === figure.id ? "#F8B400" : "#827397",
         weight: 2,
         fillOpacity: 0.4
     };
@@ -48,9 +47,9 @@ const Figure = ({ figure, figureIndex }) => {
     return (
         <>
             {figure.type === "polygon" && <Polygon pathOptions={poylgonPathOptions} {...figureProps} />}
-            {figure.type === "polyline" && <Polyline pathOptions={{ color: selected === figureIndex ? "#F8B400" : "#827397", weight: 4 }} {...figureProps} />}
+            {figure.type === "polyline" && <Polyline pathOptions={{ color: selected === figure.id ? "#F8B400" : "#827397", weight: 4 }} {...figureProps} />}
             {figure.markers.map((marker, index) => (
-                <DraggableMarker key={`marker${figureIndex}-${index}`} position={marker} markerIndex={index} {...markerProps} />
+                <DraggableMarker key={`marker${figure.id}-${index}`} position={marker} markerIndex={index} {...markerProps} />
             ))}
         </>
     );

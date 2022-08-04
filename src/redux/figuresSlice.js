@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import uuid from "react-uuid";
 
 const initialState = {
     selected: null,
@@ -11,34 +12,44 @@ const figuresSlice = createSlice({
     initialState,
     reducers: {
         addFigure: (state, action) => {
+            const newId = uuid();
             state.figures.push({
-                id: state.figures.length,
+                id: newId,
                 name: action.payload.name,
                 type: action.payload.type,
                 markers: [action.payload.markerPosition],
                 area: 0,
                 distance: 0
             });
-            state.selected = state.figures.length - 1;
+            state.selected = newId;
         },
         deleteFigure: (state, action) => {
-            state.selected = null;
-            state.figures = state.figures.filter(figure => figure.id !== action.payload.figureId);
+            const figureIndex = state.figures.map(figure => figure.id).indexOf(action.payload.figureId);
+            if (state.selected === state.figures[figureIndex].id) {
+                state.selected = null;
+            }
+            state.figures.splice(figureIndex, 1);
         },
         addMarker: (state, action) => {
-            state.figures[state.selected].markers.push(action.payload.markerPosition);
+            const figureIndex = state.figures.map(figure => figure.id).indexOf(state.selected);
+            state.figures[figureIndex].markers.push(action.payload.markerPosition);
         },
         deleteMarker: (state, action) => {
-            state.figures[action.payload.figureIndex].markers.splice(action.payload.markerIndex, 1);
+            const figureIndex = state.figures.map(figure => figure.id).indexOf(action.payload.figureId);
+            if (state.figures[figureIndex].markers.length === 1) {
+                state.figures.splice(figureIndex, 1);
+            } else {
+                state.figures[figureIndex].markers.splice(action.payload.markerIndex, 1);
+            }
         },
         moveMarker: (state, action) => {
-            state.figures[action.payload.figureIndex].markers[action.payload.markerIndex] = action.payload.markerPosition;
+            const figureIndex = state.figures.map(figure => figure.id).indexOf(action.payload.figureId);
+            state.figures[figureIndex].markers[action.payload.markerIndex] = action.payload.markerPosition;
         },
         selectFigure: (state, action) => {
             state.selected = action.payload;
         },
         toggleMarkersVisibility: (state, _) => {
-            console.log("sw");
             state.isMarkersVisible = !state.isMarkersVisible;
         }
     }

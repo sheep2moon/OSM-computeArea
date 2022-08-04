@@ -43,8 +43,8 @@ const FiguresContainer = () => {
 
     return (
         <>
-            {figures.map((figure, index) => (
-                <Figure key={figure.type + index} figure={figure} figureIndex={index} />
+            {figures.map(figure => (
+                <Figure key={figure.type + figure.id} figure={figure} />
             ))}
         </>
     );

@@ -12,7 +12,7 @@ import { deleteFigure, selectFigure } from "../../redux/figuresSlice.js";
 const areaUnits = ["m2", "a", "ha", "km2"];
 const distanceUnits = ["m", "km"];
 
-const FigureControls = ({ figure, figureIndex }) => {
+const FigureControls = ({ figure }) => {
     const [areaUnit, setAreaUnit] = useState(areaUnits[1]);
     const [distanceUnit, setDistanceUnit] = useState(distanceUnits[1]);
     const { selected } = useSelector(store => store.figures);
@@ -46,15 +46,14 @@ const FigureControls = ({ figure, figureIndex }) => {
     }, [figure, areaUnit]);
 
     const handleDeleteFigure = () => {
-        console.log(figure.id);
         dispatch(deleteFigure({ figureId: figure.id }));
     };
     const handleSelectFigure = () => {
-        dispatch(selectFigure(figureIndex));
+        dispatch(selectFigure(figure.id));
     };
 
     return (
-        <ControlsWrap isSelected={selected === figureIndex}>
+        <ControlsWrap isSelected={selected === figure.id}>
             <TopRow onClick={handleSelectFigure}>
                 <p>{figure.name}</p>
                 <DeleteFigureButton onClick={handleDeleteFigure}>
