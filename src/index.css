@@ -10,10 +10,8 @@
 }
 
 .leaflet-container {
-  height: calc(100vh - 4rem);
-  width: calc(100% - 28rem);
-  margin-right: 24rem;
-  margin-left: 4rem;
+  height: 100%;
+  width: 100%;
   margin-top: auto;
   cursor: crosshair;
 }

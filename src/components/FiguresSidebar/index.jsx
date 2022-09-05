@@ -5,19 +5,20 @@ import FigureControls from "./FigureControls.jsx";
 
 const FiguresSidebar = () => {
     const { figures } = useSelector(store => store.figures);
-
-    useEffect(() => {
-        console.log(figures);
-    }, [figures]);
+    const { isFiguresSidebarOpen } = useSelector(store => store.tools);
 
     return (
-        <SidebarContainer>
-            <h2>Figures</h2>
-            {figures.length === 0 && <p>no figures</p>}
-            {figures.map(figure => (
-                <FigureControls key={figure.name} figure={figure} />
-            ))}
-        </SidebarContainer>
+        <>
+            {isFiguresSidebarOpen && (
+                <SidebarContainer>
+                    <h2>Elementy</h2>
+                    {figures.length === 0 && <p>brak</p>}
+                    {figures.map(figure => (
+                        <FigureControls key={figure.name} figure={figure} />
+                    ))}
+                </SidebarContainer>
+            )}
+        </>
     );
 };
 
@@ -32,7 +33,7 @@ const SidebarContainer = styled.div`
     background-color: ${({ theme }) => theme.colors.primary};
     box-shadow: ${({ theme }) => theme.shadows.md};
     color: ${({ theme }) => theme.colors.light};
-    z-index: 999;
+    z-index: 9999;
     > h2 {
         background-color: ${({ theme }) => theme.colors.light};
         color: ${({ theme }) => theme.colors.primary};
@@ -44,5 +45,9 @@ const SidebarContainer = styled.div`
         text-align: center;
         font-size: 1.2rem;
         padding: 1rem 0;
+    }
+    @media screen and (max-width: 768px) {
+        width: 100%;
+        left: 0;
     }
 `;

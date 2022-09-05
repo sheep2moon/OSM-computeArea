@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from "react";
 import styled from "styled-components";
-import { RiDeleteBack2Line } from "react-icons/ri";
+import { RiDeleteBack2Line, RiH1 } from "react-icons/ri";
 import { AiOutlineArrowsAlt } from "react-icons/ai";
 import { BiArea } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";

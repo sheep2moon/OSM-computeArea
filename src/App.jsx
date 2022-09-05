@@ -1,20 +1,33 @@
 import styled from "styled-components";
 import { MapContainer, TileLayer } from "react-leaflet";
-import ToolsSidebar from "./components/ToolsSidebar";
+
 import FiguresContainer from "./components/FiguresContainer.jsx";
 import FiguresSidebar from "./components/FiguresSidebar/index.jsx";
-import TopBar from "./components/TopBar/TopBar.jsx";
+import Toolbar from "./components/Toolbar/index.jsx";
+import TopBar from "./components/TopBar/index.jsx";
+import { useSelector } from "react-redux";
+import MobileToolbar from "./components/MobileToolbar/index.jsx";
+import { useEffect } from "react";
 
 function App() {
+    const { isMobileToolbarOpen } = useSelector(store => store.tools);
+
+    useEffect(() => {
+        console.log(isMobileToolbarOpen);
+    }, [isMobileToolbarOpen]);
+
     return (
         <AppContainer>
-            <ToolsSidebar />
+            {isMobileToolbarOpen && <MobileToolbar />}
+            <Toolbar />
             <FiguresSidebar />
             <TopBar />
-            <MapContainer center={[51.41006810573438, 22.386360168457035]} zoom={13} scrollWheelZoom={true}>
-                <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-                <FiguresContainer />
-            </MapContainer>
+            <MapWrapper>
+                <MapContainer center={[51.41006810573438, 22.386360168457035]} zoom={13} scrollWheelZoom={true}>
+                    <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+                    <FiguresContainer />
+                </MapContainer>
+            </MapWrapper>
         </AppContainer>
     );
 }
@@ -27,4 +40,14 @@ const AppContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+`;
+
+const MapWrapper = styled.div`
+    margin-top: 4rem;
+    width: 100vw;
+    height: calc(100vh - 4rem);
+    @media screen and (min-width: 768px) {
+        margin-left: 4rem;
+        width: calc(100vw - 4rem);
+    }
 `;

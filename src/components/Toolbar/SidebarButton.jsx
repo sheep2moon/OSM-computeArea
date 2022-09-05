@@ -1,15 +1,19 @@
 import React, { useState } from "react";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 
 const SidebarButton = ({ tooltip, children, ...rest }) => {
     const [showTooltip, setShowTooltip] = useState(false);
 
+    const handleMouseOver = () => setShowTooltip(true);
+    const handleMouseOut = () => setShowTooltip(false);
     return (
         <ButtonWrapper>
             <Tooltip show={showTooltip}>
                 <p>{tooltip}</p>
             </Tooltip>
-            <StyledButton onMouseOver={() => setShowTooltip(true)} onMouseOut={() => setShowTooltip(false)} {...rest}>
+            <StyledButton onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} {...rest}>
                 {children}
             </StyledButton>
         </ButtonWrapper>
