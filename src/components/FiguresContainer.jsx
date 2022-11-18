@@ -2,12 +2,13 @@ import React from "react";
 import { useMapEvent } from "react-leaflet";
 import { useDispatch, useSelector } from "react-redux";
 import { addFigure, addMarker, deleteMarker, moveMarker, selectFigure } from "../redux/figuresSlice.js";
-import { setActiveTool } from "../redux/toolsSlice.js";
+import { openFiguresSidebar, setActiveTool } from "../redux/toolsSlice.js";
 import Figure from "./Figure.jsx";
 
 const FiguresContainer = () => {
     const { figures } = useSelector(store => store.figures);
     const { activeTool } = useSelector(store => store.tools);
+
     const dispatch = useDispatch();
 
     useMapEvent("click", e => {
@@ -22,6 +23,7 @@ const FiguresContainer = () => {
                 })
             );
             dispatch(setActiveTool("add-marker"));
+            dispatch(openFiguresSidebar());
         }
         if (activeTool === "add-polyline") {
             dispatch(

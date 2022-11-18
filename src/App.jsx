@@ -23,8 +23,8 @@ function App() {
             <FiguresSidebar />
             <TopBar />
             <MapWrapper>
-                <MapContainer center={[51.41006810573438, 22.386360168457035]} zoom={13} scrollWheelZoom={true}>
-                    <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+                <MapContainer center={[51.41006810573438, 22.386360168457035]} zoom={13} maxZoom={22} scrollWheelZoom={true}>
+                    <TileLayer maxNativeZoom={19} maxZoom={22} attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
                     <FiguresContainer />
                 </MapContainer>
             </MapWrapper>
