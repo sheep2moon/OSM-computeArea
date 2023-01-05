@@ -13,8 +13,8 @@ const areaUnits = ["m2", "a", "ha", "km2"];
 const distanceUnits = ["m", "km"];
 
 const FigureControls = ({ figure }) => {
-    const [areaUnit, setAreaUnit] = useState(areaUnits[1]);
-    const [distanceUnit, setDistanceUnit] = useState(distanceUnits[1]);
+    const [areaUnit, setAreaUnit] = useState(areaUnits[0]);
+    const [distanceUnit, setDistanceUnit] = useState(distanceUnits[0]);
     const { selected } = useSelector(store => store.figures);
     const dispatch = useDispatch();
 

@@ -33,6 +33,7 @@ const FiguresContainer = () => {
                     markerPosition
                 })
             );
+            dispatch(openFiguresSidebar());
             dispatch(setActiveTool("add-marker"));
         }
         if (activeTool === "add-marker") {
