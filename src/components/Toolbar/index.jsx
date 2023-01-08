@@ -24,7 +24,7 @@ export const tools = [
     },
     {
         name: "add-polyline",
-        tooltip: "Dodaj trasę",
+        tooltip: "Dodaj linie",
         icon: <IoAnalyticsOutline />
     },
     {

@@ -17,7 +17,6 @@ const FiguresContainer = () => {
         if (activeTool === "add-polygon") {
             dispatch(
                 addFigure({
-                    name: `polygon${figures.length}`,
                     type: "polygon",
                     markerPosition
                 })
@@ -28,7 +27,6 @@ const FiguresContainer = () => {
         if (activeTool === "add-polyline") {
             dispatch(
                 addFigure({
-                    name: `polyline${figures.length}`,
                     type: "polyline",
                     markerPosition
                 })

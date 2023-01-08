@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Polygon, Polyline } from "react-leaflet";
+import { Polygon, Polyline, Tooltip } from "react-leaflet";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteMarker, moveMarker, selectFigure } from "../redux/figuresSlice.js";
 import DraggableMarker from "./DraggableMarker.jsx";

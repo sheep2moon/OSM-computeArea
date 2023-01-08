@@ -19,7 +19,6 @@ function App() {
 
     const borderParams = useMemo(() => {
         return {
-            SRS: "EPSG:2180",
             WIDTH: window.innerWidth,
             HEIGHT: window.innerHeight,
             FORMAT: "image/png"
@@ -27,8 +26,6 @@ function App() {
     }, []);
     const planParams = useMemo(() => {
         return {
-            REQUEST: "GetFeatureInfo",
-            SRS: "EPSG:2180",
             WIDTH: window.innerWidth,
             HEIGHT: window.innerHeight,
             FORMAT: "image/png"
@@ -45,7 +42,8 @@ function App() {
                 <MapContainer center={[51.41006810573438, 22.386360168457035]} zoom={13} maxZoom={22} scrollWheelZoom={true}>
                     <TileLayer maxNativeZoom={19} maxZoom={22} attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
                     <WMSTileLayer transparent={true} layers="dzialki" params={borderParams} url="https://integracja01.gugik.gov.pl/cgi-bin/KrajowaIntegracjaEwidencjiGruntow?" maxZoom={22} />
-                    <WMSTileLayer layers="granice" params={planParams} url="https://mapy.geoportal.gov.pl/wss/ext/KrajowaIntegracjaMiejscowychPlanowZagospodarowaniaPrzestrzennego?" maxZoom={22} />
+                    {/* <WMSTileLayer transparent={true} layers="przewod_wodociagowy" params={planParams} url="https://integracja01.gugik.gov.pl/cgi-bin/KrajowaIntegracjaEwidencjiGruntow?" maxZoom={22} /> */}
+
                     <FiguresContainer />
                 </MapContainer>
             </MapWrapper>

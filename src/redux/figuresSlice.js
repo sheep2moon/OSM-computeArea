@@ -13,9 +13,10 @@ const figuresSlice = createSlice({
     reducers: {
         addFigure: (state, action) => {
             const newId = uuid();
+            const newFigureName = action.payload.type == "polygon" ? `polygon${state.figures.length}` : `polyline${state.figures.length}`;
             state.figures.push({
                 id: newId,
-                name: action.payload.name,
+                name: newFigureName,
                 type: action.payload.type,
                 markers: [action.payload.markerPosition],
                 area: 0,

@@ -118,6 +118,13 @@ const DeleteFigureButton = styled.button`
     background: none;
     border: none;
     padding: 0.25rem;
+    cursor: pointer;
+    :hover {
+        > svg {
+            color: ${({ theme }) => theme.colors.light};
+            scale: 1.05;
+        }
+    }
     > svg {
         font-size: 1.8rem;
         color: ${({ theme }) => theme.colors.accent};
