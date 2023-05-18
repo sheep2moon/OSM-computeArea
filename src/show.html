@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>Usługa sieciowa typu REST API wykorzystująca zapytanie HTTP GET. Dane udostęniane są w formacie JSON, XML, CSV, JSV.</p>\r\n\r\n<p>Przykładowe zapytania:</p>\r\n\r\n<p>1. Pobieranie obiektu - otwarteDaneZestawienieZrn/{klucz}?{format}</p>\r\n\r\n<p>Jako klucz ustawione jest pole inspireId, np.</p>\r\n\r\n<p><a href=\"https://api.zabytek.gov.pl/nidrestapi/api/data/geoportal/otwarteDaneZestawienieZrn/PL.1.9.ZIPOZ.NID_N_06_ZE.1365?format=json\">https://api.zabytek.gov.pl/nidrestapi/api/data/geoportal/otwarteDaneZestawienieZrn/PL.1.9.ZIPOZ.NID_N_06_ZE.1365?format=json</a></p>\r\n\r\n<p>2. Filtrowanie obiektów -  filter=[\"Amount\", \">\", 20] np.</p>\r\n\r\n<p><a href=\"https://api.zabytek.gov.pl/nidrestapi/api/data/geoportal/otwarteDaneZestawienieZrn?format=json&amp;filter=[&quot;wojewodztwo&quot;,&quot;=&quot;,&quot;lubelskie&quot;]\">https://api.zabytek.gov.pl/nidrestapi/api/data/geoportal/otwarteDaneZestawienieZrn?format=json&filter=[\"wojewodztwo\",\"=\",\"lubelskie\"]</a></p>\r\n\r\n<p>3. Pobieranie określonej liczby obiektów - take=value np.</p>\r\n\r\n<p><a href=\"https://api.zabytek.gov.pl/nidrestapi/api/data/geoportal/otwarteDaneZestawienieZrn?format=json&amp;take=10\">https://api.zabytek.gov.pl/nidrestapi/api/data/geoportal/otwarteDaneZestawienieZrn?format=json&take=10</a></p>\r\n\r\n<p>4. Pomijanie rekordów – skip=value np.</p>\r\n\r\n<p><a href=\"https://api.zabytek.gov.pl/nidrestapi/api/data/geoportal/otwarteDaneZestawienieZrn?format=json&amp;take=100&amp;skip=5000\">https://api.zabytek.gov.pl/nidrestapi/api/data/geoportal/otwarteDaneZestawienieZrn?format=json&take=100&skip=5000</a></p>\r\n\r\n<p>5. Sortowanie – sort={\"selector\":\"nazwa_atrybutu\", desc:false} np. </p>\r\n\r\n<p><a href=\"https://api.zabytek.gov.pl/nidrestapi/api/data/geoportal/otwarteDaneZestawienieZrn?format=json&amp;take=100&amp;sort={&quot;selector&quot;:&quot;wojewodztwo&quot;, desc:true}\">https://api.zabytek.gov.pl/nidrestapi/api/data/geoportal/otwarteDaneZestawienieZrn?format=json&take=100&sort={\"selector\":\"wojewodztwo\", desc:true}</a></p>
+</body>
+</html>

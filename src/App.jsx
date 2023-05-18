@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 import MobileToolbar from "./components/MobileToolbar/index.jsx";
 import { useEffect } from "react";
 import { useMemo } from "react";
+import Monuments from "./components/MapLayers/Monuments.jsx";
 
 function App() {
     const { isMobileToolbarOpen } = useSelector(store => store.tools);
@@ -24,12 +25,8 @@ function App() {
             FORMAT: "image/png"
         };
     }, []);
-    const planParams = useMemo(() => {
-        return {
-            WIDTH: window.innerWidth,
-            HEIGHT: window.innerHeight,
-            FORMAT: "image/png"
-        };
+    const monumentParams = useMemo(() => {
+        return {};
     }, []);
 
     return (
@@ -41,8 +38,11 @@ function App() {
             <MapWrapper>
                 <MapContainer center={[51.41006810573438, 22.386360168457035]} zoom={13} maxZoom={22} scrollWheelZoom={true}>
                     <TileLayer maxNativeZoom={19} maxZoom={22} attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+                    <WMSTileLayer transparent={true} layers="geoportal" params={borderParams} url="https://integracja01.gugik.gov.pl/cgi-bin/KrajowaIntegracjaEwidencjiGruntow?" maxZoom={22} />
                     <WMSTileLayer transparent={true} layers="dzialki" params={borderParams} url="https://integracja01.gugik.gov.pl/cgi-bin/KrajowaIntegracjaEwidencjiGruntow?" maxZoom={22} />
-                    {/* <WMSTileLayer transparent={true} layers="przewod_wodociagowy" params={planParams} url="https://integracja01.gugik.gov.pl/cgi-bin/KrajowaIntegracjaEwidencjiGruntow?" maxZoom={22} /> */}
+
+                    <Monuments />
+                    {/* <WMSTileLayer styles="Default" format="image/png" version="1.3.0" transparent={true} layers="Immovable_Monuments" params={monumentParams} url="https://usluga.zabytek.gov.pl/INSPIRE_IMD/service.svc/get?" b/> */}
 
                     <FiguresContainer />
                 </MapContainer>

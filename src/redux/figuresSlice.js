@@ -33,7 +33,9 @@ const figuresSlice = createSlice({
         },
         addMarker: (state, action) => {
             const figureIndex = state.figures.map(figure => figure.id).indexOf(state.selected);
-            state.figures[figureIndex].markers.push(action.payload.markerPosition);
+            if (figureIndex >= 0) {
+                state.figures[figureIndex].markers.push(action.payload.markerPosition);
+            }
         },
         deleteMarker: (state, action) => {
             const figureIndex = state.figures.map(figure => figure.id).indexOf(action.payload.figureId);

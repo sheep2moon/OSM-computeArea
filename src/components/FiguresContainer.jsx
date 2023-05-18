@@ -11,6 +11,10 @@ const FiguresContainer = () => {
 
     const dispatch = useDispatch();
 
+    const map = useMapEvent("click", e => {
+        console.log(e, map.getBounds().toBBoxString());
+    });
+
     useMapEvent("click", e => {
         const { lat, lng } = e.latlng;
         const markerPosition = [lat, lng];
